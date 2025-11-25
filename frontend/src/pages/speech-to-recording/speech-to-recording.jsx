@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import './SpeechToRecording.css'
+import './speech-to-recording.css'
 
 function SpeechToRecording() {
   const [isRecording, setIsRecording] = useState(false)

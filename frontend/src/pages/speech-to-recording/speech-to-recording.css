@@ -8,17 +8,23 @@
 }
 
 .page-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
   text-align: center;
-  color: var(--text-color);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .page-subtitle {
   text-align: center;
-  color: var(--secondary-color);
-  margin-bottom: 2rem;
-  font-size: var(--font-size-base);
+  color: var(--text-light);
+  margin-bottom: 2.5rem;
+  font-size: var(--font-size-lg);
+  font-weight: 400;
 }
 
 .recording-controls {
@@ -28,22 +34,26 @@
 }
 
 .record-btn {
-  padding: 1rem 3rem;
-  background: var(--primary-color);
+  padding: 1.25rem 3.5rem;
+  background: var(--primary-gradient);
   color: white;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius);
   font-size: var(--font-size-lg);
-  font-weight: 500;
-  transition: all 0.2s;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.5px;
 }
 
 .record-btn:hover {
-  background: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .record-btn.recording {
-  background: #dc2626;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   animation: pulse 2s infinite;
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
 }
 
 .recording-indicator {
@@ -74,11 +84,16 @@
 }
 
 .recordings-list {
-  background: white;
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-xl);
+  transition: var(--transition);
+}
+
+.recordings-list:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
 .recordings-title {
@@ -101,9 +116,18 @@
 }
 
 .recording-item {
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 0.375rem;
+  padding: 1.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: #ffffff;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.recording-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
   background: #f8fafc;
 }
 
@@ -140,30 +164,45 @@
 }
 
 .download-btn {
-  background: var(--primary-color);
+  background: var(--primary-gradient);
   color: white;
+  box-shadow: var(--shadow-sm);
 }
 
 .download-btn:hover {
-  background: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .delete-btn {
-  background: #dc2626;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: white;
+  box-shadow: var(--shadow-sm);
 }
 
 .delete-btn:hover {
-  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 1400px) {
+  .speech-to-recording-container {
+    padding: 0 1rem;
+  }
 }
 
 @media (max-width: 768px) {
   .page-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
+    font-size: var(--font-size-base);
   }
 
   .recordings-list {
     padding: 1.5rem;
+    border-radius: var(--border-radius);
   }
 
   .recording-info {

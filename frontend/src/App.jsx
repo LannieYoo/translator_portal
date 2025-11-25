@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout/Layout'
-import Home from './pages/Home/Home'
-import Dictionary from './pages/Dictionary/Dictionary'
-import TextToSpeech from './pages/TextToSpeech/TextToSpeech'
-import SpeechToText from './pages/SpeechToText/SpeechToText'
-import SpeechToRecording from './pages/SpeechToRecording/SpeechToRecording'
-import Translator from './pages/Translator/Translator'
+import Layout from './components/layout/layout'
+import Home from './pages/home/home'
+import Dictionary from './pages/dictionary/dictionary'
+import TextToSpeech from './pages/text-to-speech/text-to-speech'
+import SpeechToText from './pages/speech-to-text/speech-to-text'
+import SpeechToRecording from './pages/speech-to-recording/speech-to-recording'
+import Translator from './pages/translator/translator'
 
 function App() {
   return (

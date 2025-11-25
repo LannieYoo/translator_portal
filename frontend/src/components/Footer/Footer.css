@@ -1,8 +1,20 @@
 .footer {
-  background-color: var(--text-color);
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
   color: white;
   margin-top: auto;
-  padding: 2rem 0;
+  padding: 2.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--primary-gradient);
 }
 
 .footer-container {
@@ -36,12 +48,16 @@
   gap: 0.5rem;
   color: white;
   opacity: 0.8;
-  transition: opacity 0.2s;
+  transition: var(--transition);
   font-size: var(--font-size-base);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
 }
 
 .footer-link:hover {
   opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .footer-icon {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './TextToSpeech.css'
+import './text-to-speech.css'
 
 function TextToSpeech() {
   const [text, setText] = useState('')
