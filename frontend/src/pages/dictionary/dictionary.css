@@ -1,0 +1,543 @@
+.dictionary {
+  width: 100%;
+}
+
+.dictionary-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+}
+
+.dictionary-box {
+  background: #ffffff;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: var(--transition);
+  color: #1e293b;
+}
+
+.dictionary-box:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.search-controls {
+  margin-bottom: 2rem;
+}
+
+.search-input-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: inherit;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background: #ffffff;
+}
+
+.direction-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  background: #f8fafc;
+  color: #1e293b;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.direction-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background: #ffffff;
+}
+
+.search-btn {
+  padding: 0.875rem 2rem;
+  background: var(--primary-gradient);
+  color: white;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.5px;
+}
+
+.search-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.detected-language {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.results-section {
+  min-height: 200px;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-item {
+  padding: 1.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  background: #f8fafc;
+  transition: var(--transition);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  color: #1e293b;
+}
+
+.result-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  background: #ffffff;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.result-word-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.result-word {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.result-english-word {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #64748b;
+  font-style: italic;
+}
+
+.result-korean-word {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #64748b;
+  font-style: italic;
+}
+
+.result-chinese-word {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #64748b;
+  font-style: italic;
+}
+
+.result-pronunciation {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pronunciation-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.emoji-flag {
+  font-size: 1.25rem !important;
+  line-height: 1;
+  display: inline-block;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Noto Emoji', sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  vertical-align: middle;
+  width: auto;
+  height: auto;
+}
+
+.emoji-icon {
+  font-size: 1.125rem !important;
+  line-height: 1;
+  display: inline-block;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Noto Emoji', sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  vertical-align: middle;
+}
+
+.pronunciation-text {
+  font-size: var(--font-size-base);
+  color: #1e293b;
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+}
+
+.speaker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.125rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: var(--transition);
+  border-radius: 4px;
+}
+
+.speaker-btn:hover {
+  color: var(--primary-color);
+  background: #f1f5f9;
+  transform: scale(1.1);
+}
+
+.speaker-btn:active {
+  transform: scale(0.95);
+}
+
+.result-translation {
+  font-size: var(--font-size-lg);
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.result-example {
+  font-size: var(--font-size-base);
+  color: #475569;
+  font-style: italic;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* 의미별 번역 섹션 */
+.meanings-section {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.meaning-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.meaning-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.meaning-number {
+  min-width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.meaning-content {
+  flex: 1;
+}
+
+.meaning-translation {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.meaning-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.example-ko {
+  font-size: var(--font-size-base);
+  color: #1e293b;
+  padding-left: 0.5rem;
+}
+
+.example-zh {
+  font-size: var(--font-size-base);
+  color: #1e293b;
+  padding-left: 0.5rem;
+}
+
+.example-en-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+.example-en {
+  font-size: var(--font-size-base);
+  color: #1e293b;
+  font-style: italic;
+  flex: 1;
+}
+
+.example-speaker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: var(--transition);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.example-speaker-btn:hover {
+  color: var(--primary-color);
+  background: #f1f5f9;
+  transform: scale(1.1);
+}
+
+.example-speaker-btn:active {
+  transform: scale(0.95);
+}
+
+/* Synonyms, Antonyms 섹션 */
+.synonyms-section,
+.antonyms-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e2e8f0;
+}
+
+.section-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.word-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.word-tag {
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.synonym-tag {
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+}
+
+.synonym-tag:hover {
+  background: #bfdbfe;
+  transform: translateY(-1px);
+}
+
+.antonym-tag {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.antonym-tag:hover {
+  background: #fecaca;
+  transform: translateY(-1px);
+}
+
+/* Phrasal Verbs 섹션 */
+.phrasal-verbs-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e2e8f0;
+}
+
+.phrasal-verbs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.phrasal-verb-item {
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--primary-color);
+}
+
+.phrasal-verb-word {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.phrasal-verb-meaning {
+  font-size: var(--font-size-base);
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.phrasal-verb-example {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  font-size: var(--font-size-base);
+}
+
+@media (max-width: 1400px) {
+  .dictionary-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .dictionary-box {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+  }
+
+  .search-input-group {
+    flex-direction: column;
+  }
+
+  .direction-select {
+    min-width: 100%;
+  }
+
+  .result-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .result-pronunciation {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .meaning-item {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .meaning-number {
+    align-self: flex-start;
+  }
+
+  .word-list {
+    gap: 0.375rem;
+  }
+
+  .word-tag {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.625rem;
+  }
+}
+
