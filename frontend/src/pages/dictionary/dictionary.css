@@ -3,38 +3,22 @@
 }
 
 .dictionary-container {
-  max-width: 900px;
+  max-width: 1300px;
   margin: 0 auto;
+  width: 100%;
 }
 
-.page-title {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-  text-align: center;
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.page-subtitle {
-  text-align: center;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  font-size: var(--font-size-lg);
-  font-weight: 400;
-}
-
+/* 공통 스타일은 common.css에서 import */
 .dictionary-box {
+  /* page-box 스타일과 동일 */
   background: #ffffff;
   border: 2px solid rgba(59, 130, 246, 0.2);
   border-radius: var(--border-radius-lg);
-  padding: 1.5rem;
+  padding: 2.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: var(--transition);
   color: #1e293b;
+  margin-top: 3.5rem;
 }
 
 .dictionary-box:hover {

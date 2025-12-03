@@ -3,8 +3,9 @@
 }
 
 .speech-to-text-container {
-  max-width: 900px;
+  max-width: 1300px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .page-title {
@@ -36,6 +37,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: var(--transition);
   color: #1e293b;
+  margin-top: 3.5rem;
 }
 
 .control-panel:hover {

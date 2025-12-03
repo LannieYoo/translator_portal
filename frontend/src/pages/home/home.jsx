@@ -12,6 +12,34 @@ function Home() {
   const translateTimeoutRef = useRef(null)
   const grammarTimeoutRef = useRef(null)
 
+  // 클립보드 복사 함수
+  const copyToClipboard = async (text) => {
+    if (!text || !text.trim()) {
+      return
+    }
+    
+    try {
+      await navigator.clipboard.writeText(text)
+      // 간단한 피드백 (선택사항: 토스트 메시지 추가 가능)
+      console.log('Copied to clipboard')
+    } catch (err) {
+      console.error('Failed to copy:', err)
+      // Fallback: 구식 방법
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      textArea.style.position = 'fixed'
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.select()
+      try {
+        document.execCommand('copy')
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr)
+      }
+      document.body.removeChild(textArea)
+    }
+  }
+
   const languages = [
     { code: 'ko', name: 'Korean' },
     { code: 'en', name: 'English' },
@@ -392,102 +420,90 @@ function Home() {
   }, [sourceLang, targetLang])
 
   return (
-    <div className="home">
-      <div className="home-container">
-        <h1 className="home-title">Fast Translator</h1>
-        <p className="home-subtitle">LLM-powered translator that converts your words into sentences in any language</p>
-
-        <div className="translator-box">
-          <div className="language-selector">
-            <select
-              value={sourceLang}
-              onChange={(e) => {
-                const newSourceLang = e.target.value
-                setSourceLang(newSourceLang)
-                // source와 target이 같아지면 target을 다른 언어로 변경
-                if (newSourceLang === targetLang) {
-                  const otherLang = languages.find(l => l.code !== newSourceLang)
-                  if (otherLang) setTargetLang(otherLang.code)
-                }
-              }}
-              className="lang-select"
-            >
-              {languages.map(lang => (
-                <option key={lang.code} value={lang.code}>{lang.name}</option>
-              ))}
-            </select>
-            <button onClick={handleSwap} className="swap-btn" aria-label="Swap languages">
-              ⇄
-            </button>
-            <select
-              value={targetLang}
-              onChange={(e) => setTargetLang(e.target.value)}
-              className="lang-select"
-            >
-              {/* source 언어는 target 목록에서 제외 */}
-              {languages.filter(lang => lang.code !== sourceLang).map(lang => (
-                <option key={lang.code} value={lang.code}>{lang.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="input-section">
-            <textarea
-              value={inputText}
-              onChange={(e) => {
-                const newValue = e.target.value
-                setInputText(newValue)
-                
-                // 즉시 언어 감지 및 select box 변경
-                const detectedLang = detectLanguage(newValue)
-                if (newValue && newValue.trim()) {
-                  if (detectedLang === 'ko') {
-                    setSourceLang('ko')
-                    setTargetLang('en')
-                  } else if (detectedLang === 'en') {
-                    setSourceLang('en')
-                    setTargetLang('ko')
-                  } else if (detectedLang === 'zh') {
-                    setSourceLang('zh')
-                    setTargetLang('en')
+    <>
+      <div className="flex flex-col items-center text-center gap-4 -mt-6">
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter" style={{ color: '#3E424D' }}>Instant Translation</h1>
+      </div>
+      
+      <div className="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm relative mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left side - Input */}
+          <div className="flex flex-col p-6 border-b md:border-b-0 md:border-r border-border-light dark:border-border-dark">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <select
+                  value={sourceLang}
+                  onChange={(e) => {
+                    const newSourceLang = e.target.value
+                    setSourceLang(newSourceLang)
+                    if (newSourceLang === targetLang) {
+                      const otherLang = languages.find(l => l.code !== newSourceLang)
+                      if (otherLang) setTargetLang(otherLang.code)
+                    }
+                  }}
+                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors bg-transparent border border-border-light dark:border-border-dark"
+                >
+                  {languages.map(lang => (
+                    <option key={lang.code} value={lang.code}>{lang.name}</option>
+                  ))}
+                </select>
+              </div>
+              <span className="text-sm text-text-muted-light dark:text-text-muted-dark">{inputText.length} / 5000</span>
+            </div>
+            
+            <div className="flex-1">
+              <textarea
+                value={inputText}
+                onChange={(e) => {
+                  const newValue = e.target.value
+                  setInputText(newValue)
+                  
+                  const detectedLang = detectLanguage(newValue)
+                  if (newValue && newValue.trim()) {
+                    if (detectedLang === 'ko') {
+                      setSourceLang('ko')
+                      setTargetLang('en')
+                    } else if (detectedLang === 'en') {
+                      setSourceLang('en')
+                      setTargetLang('ko')
+                    } else if (detectedLang === 'zh') {
+                      setSourceLang('zh')
+                      setTargetLang('en')
+                    }
                   }
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {
-                  e.preventDefault()
-                  // 자동 번역이 이미 실행되므로 별도 처리 불필요
-                }
-              }}
-              placeholder="Enter text to translate... (Auto-translates as you type)"
-              className="input-textarea"
-              rows={8}
-            />
-            {/* 영어 문법/철자 오류 표시 */}
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {
+                    e.preventDefault()
+                  }
+                }}
+                placeholder="Enter text to translate..."
+                className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md bg-transparent text-lg placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:outline-none focus:ring-0 border-none p-0"
+                rows={8}
+              />
+            </div>
+            
+            {/* Grammar errors */}
             {grammarErrors.length > 0 && (
-              <div className="grammar-errors">
-                <div className="grammar-header">
-                  <span className="grammar-icon">⚠️</span>
-                  <span className="grammar-title">Grammar & Spelling Issues ({grammarErrors.length})</span>
+              <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
+                <div className="text-sm font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
+                  Grammar & Spelling Issues ({grammarErrors.length})
                 </div>
-                <div className="grammar-list">
+                <div className="space-y-2">
                   {grammarErrors.map((error, index) => (
-                    <div key={index} className="grammar-item">
-                      <div className="grammar-message">{error.message}</div>
+                    <div key={index} className="text-sm">
+                      <div className="text-yellow-900 dark:text-yellow-100">{error.message}</div>
                       {error.replacements.length > 0 && (
-                        <div className="grammar-suggestions">
-                          <span className="suggestion-label">Suggestions:</span>
+                        <div className="mt-1 flex flex-wrap gap-2">
                           {error.replacements.map((replacement, idx) => (
                             <button
                               key={idx}
-                              className="suggestion-btn"
+                              className="px-2 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90"
                               onClick={() => {
-                                // 오류 부분을 제안된 단어로 교체
                                 const before = inputText.substring(0, error.offset)
                                 const after = inputText.substring(error.offset + error.length)
                                 const newText = before + replacement + after
                                 setInputText(newText)
-                                // 문법 검사 다시 실행
                                 setTimeout(() => checkGrammar(newText), 100)
                               }}
                             >
@@ -502,30 +518,89 @@ function Home() {
               </div>
             )}
             {isCheckingGrammar && (
-              <div className="grammar-checking">Checking grammar...</div>
+              <div className="mt-2 text-sm text-text-muted-light dark:text-text-muted-dark italic">Checking grammar...</div>
             )}
+            
+            <div className="flex justify-between items-center mt-4">
+              <div className="flex gap-2">
+                <button className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted-light dark:text-text-muted-dark hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <span className="material-symbols-outlined text-xl">volume_up</span>
+                </button>
+                <button 
+                  onClick={() => copyToClipboard(inputText)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted-light dark:text-text-muted-dark hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  aria-label="Copy input text"
+                >
+                  <span className="material-symbols-outlined text-xl">content_copy</span>
+                </button>
+              </div>
+              <button
+                onClick={handleTranslate}
+                disabled={isTranslating || !inputText.trim()}
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-primary hover:bg-primary/90 text-white text-sm font-semibold tracking-wide transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span className="truncate">{isTranslating ? 'Translating...' : 'Translate'}</span>
+              </button>
+            </div>
           </div>
-
-          <button
-            onClick={handleTranslate}
-            disabled={isTranslating || !inputText.trim()}
-            className="translate-btn"
-          >
-            {isTranslating ? 'Translating...' : 'Translate'}
-          </button>
-
-          <div className="output-section">
-            <textarea
-              value={outputText}
-              readOnly
-              placeholder="Translation result will appear here..."
-              className="output-textarea"
-              rows={8}
-            />
+          
+          {/* Right side - Output */}
+          <div className="flex flex-col p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <select
+                  value={targetLang}
+                  onChange={(e) => setTargetLang(e.target.value)}
+                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors bg-transparent border border-border-light dark:border-border-dark"
+                >
+                  {languages.filter(lang => lang.code !== sourceLang).map(lang => (
+                    <option key={lang.code} value={lang.code}>{lang.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex gap-2">
+                <button className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted-light dark:text-text-muted-dark hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <span className="material-symbols-outlined text-xl">volume_up</span>
+                </button>
+                <button 
+                  onClick={() => copyToClipboard(outputText)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted-light dark:text-text-muted-dark hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  aria-label="Copy translation"
+                >
+                  <span className="material-symbols-outlined text-xl">content_copy</span>
+                </button>
+              </div>
+            </div>
+            
+            <div className="flex-1">
+              <textarea
+                value={outputText}
+                readOnly
+                placeholder="Translation will appear here."
+                className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md bg-transparent text-lg placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:outline-none focus:ring-0 border-none p-0 min-h-[192px]"
+                rows={8}
+              />
+            </div>
           </div>
         </div>
+        {/* Swap button in the middle - Desktop */}
+        <button
+          onClick={handleSwap}
+          className="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-card-dark border border-border-light dark:border-border-dark text-primary hover:bg-slate-100 dark:hover:bg-slate-800 shadow-md transition-colors z-10"
+          aria-label="Swap languages"
+        >
+          <span className="material-symbols-outlined text-xl">swap_horiz</span>
+        </button>
+        {/* Swap button in the middle - Mobile */}
+        <button
+          onClick={handleSwap}
+          className="md:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-card-dark border border-border-light dark:border-border-dark text-primary hover:bg-slate-100 dark:hover:bg-slate-800 shadow-md transition-colors z-10 flex"
+          aria-label="Swap languages"
+        >
+          <span className="material-symbols-outlined text-xl">swap_horiz</span>
+        </button>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -80,8 +80,9 @@ function SpeechToRecording() {
   return (
     <div className="speech-to-recording">
       <div className="speech-to-recording-container">
-        <h1 className="page-title">Audio Recording</h1>
-        <p className="page-subtitle">Record and save audio</p>
+        <div className="flex flex-col items-center text-center gap-4 -mt-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter" style={{ color: '#3E424D' }}>Audio Recording</h1>
+        </div>
 
         <div className="recording-controls">
           <button

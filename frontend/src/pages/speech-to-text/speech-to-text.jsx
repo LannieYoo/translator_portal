@@ -139,8 +139,9 @@ function SpeechToText() {
   return (
     <div className="speech-to-text">
       <div className="speech-to-text-container">
-        <h1 className="page-title">Speech to Text</h1>
-        <p className="page-subtitle">Convert speech to text in real-time</p>
+        <div className="flex flex-col items-center text-center gap-4 -mt-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter" style={{ color: '#3E424D' }}>Speech to Text</h1>
+        </div>
 
         <div className="control-panel">
           <div className="language-select-wrapper">

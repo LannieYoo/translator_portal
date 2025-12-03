@@ -1,81 +1,81 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './common.css';
 
 :root {
-  --primary-color: #3b82f6;
-  --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-  --primary-dark: #2563eb;
+  --primary-color: #F94B08;
+  --primary-gradient: linear-gradient(135deg, #F94B08 0%, #FB6B28 100%);
+  --primary-dark: #D93D00;
   --secondary-color: #60a5fa;
-  --text-color: #f1f5f9;
-  --text-light: #cbd5e1;
-  --text-muted: #94a3b8;
-  --bg-color: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  --bg-light: #1e293b;
-  --border-color: #334155;
-  --border-light: #475569;
-  --hover-color: #60a5fa;
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+  --text-color: #1F2937;
+  --text-light: #6B7280;
+  --text-muted: #6B7280;
+  --bg-color: #D4E4F3;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #D4E4F3;
+  --bg-gradient: linear-gradient(135deg, #F9FAFB 0%, #ffffff 100%);
+  --bg-light: #ffffff;
+  --border-color: #E5E7EB;
+  --border-light: #E5E7EB;
+  --hover-color: #F94B08;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(249, 75, 8, 0.3);
   --font-size-base: 16px;
   --font-size-lg: 17px;
-  --max-width: 1400px;
+  --font-size-sm: 14px;
+  --max-width: 1300px;
   --border-radius: 12px;
   --border-radius-lg: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
-    sans-serif;
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: var(--font-size-base);
-  color: var(--text-color);
-  background: var(--bg-gradient);
-  background-attachment: fixed;
-  min-height: 100vh;
-  line-height: 1.6;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.bg-background-light {
+  background-color: rgb(212, 228, 243) !important;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* 강제로 primary 색상 적용 */
+.bg-primary {
+  background-color: #F94B08 !important;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
+.text-primary {
+  color: #F94B08 !important;
 }
 
-input, textarea, select {
-  font-family: inherit;
-  font-size: inherit;
+.border-primary {
+  border-color: #F94B08 !important;
 }
 
-select {
-  color: var(--text-color);
+.hover\:bg-primary:hover {
+  background-color: #F94B08 !important;
 }
 
-select option {
-  background: var(--bg-tertiary);
-  color: var(--text-color);
+.hover\:text-primary:hover {
+  color: #F94B08 !important;
 }
 

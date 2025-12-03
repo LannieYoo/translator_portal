@@ -45,8 +45,9 @@ function TextToSpeech() {
   return (
     <div className="text-to-speech">
       <div className="text-to-speech-container">
-        <h1 className="page-title">Text to Speech</h1>
-        <p className="page-subtitle">Enter text and it will be converted to speech in the selected language</p>
+        <div className="flex flex-col items-center text-center gap-4 -mt-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter" style={{ color: '#3E424D' }}>Text to Speech</h1>
+        </div>
 
         <div className="tts-box">
           <div className="language-select-wrapper">

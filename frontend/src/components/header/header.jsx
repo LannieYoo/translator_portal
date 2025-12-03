@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import './header.css'
 import LogoIcon from './LogoIcon'
 
 function Header() {
@@ -13,7 +12,6 @@ function Header() {
     { path: '/text-to-speech', label: 'Text to Speech', name: 'textToSpeech' },
     { path: '/speech-to-text', label: 'Speech to Text', name: 'speechToText' },
     { path: '/speech-to-recording', label: 'Recording', name: 'recording' },
-    { path: '/translator', label: 'Translate', name: 'translator' },
   ]
 
   const toggleMenu = () => {
@@ -25,41 +23,63 @@ function Header() {
   }
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <Link to="/" className="logo" onClick={closeMenu}>
-          <div className="logo-icon-wrapper">
+    <header className="relative flex items-center justify-between whitespace-nowrap py-6">
+      <div className="flex items-center gap-4">
+        <Link to="/" className="flex items-center gap-2 text-text-light dark:text-text-dark" onClick={closeMenu}>
+          <div className="w-6 h-6 text-primary flex items-center justify-center">
             <LogoIcon />
           </div>
-          <span className="logo-text">Speaking to Text</span>
+          <h2 className="text-xl font-bold">UniLingo</h2>
         </Link>
-
-        <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
-          <ul className="nav-list">
-            {menuItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <button 
-          className="hamburger"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-          <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-          <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-        </button>
       </div>
+      
+      <div className="hidden md:flex flex-1 items-center justify-end gap-6">
+        <nav className="flex items-center gap-6">
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`text-base ${
+                location.pathname === item.path
+                  ? 'font-semibold text-primary'
+                  : 'font-medium text-text-muted-light dark:text-text-muted-dark hover:text-text-light dark:hover:text-text-dark transition-colors'
+              }`}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      
+      <button 
+        className="md:hidden flex items-center justify-center h-14 w-14 -mt-1 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        <span className="material-symbols-outlined text-4xl font-bold">menu</span>
+      </button>
+      
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 right-0 z-50 bg-white dark:bg-card-dark border-b border-border-light dark:border-border-dark shadow-lg md:hidden">
+          <div className="flex flex-col px-4 py-3">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`text-base font-medium py-3 px-2 rounded-md transition-colors ${
+                  location.pathname === item.path
+                    ? 'text-primary bg-primary/10 dark:bg-primary/20'
+                    : 'text-text-muted-light dark:text-text-muted-dark hover:text-text-light dark:hover:text-text-dark hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   )
 }

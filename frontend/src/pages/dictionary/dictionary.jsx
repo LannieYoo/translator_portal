@@ -871,9 +871,11 @@ function Dictionary() {
 
   return (
     <div className="dictionary">
-      <div className="dictionary-container">
-        <h1 className="page-title">Dictionary</h1>
-        <p className="page-subtitle">Search for words using free dictionary service</p>
+      <div className="dictionary-container max-w-desktop mx-auto">
+        <div className="flex flex-col items-center text-center gap-4 -mt-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter" style={{ color: '#3E424D' }}>Dictionary</h1>
+        </div>
+        
         <div className="dictionary-box">
           <div className="search-controls">
             <div className="search-input-group" ref={inputRef}>
