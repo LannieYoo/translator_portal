@@ -133,13 +133,14 @@
 }
 
 .stop-btn {
-  background: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
+  background: #64748b;
   color: white;
   box-shadow: var(--shadow-md);
   letter-spacing: 0.5px;
 }
 
 .stop-btn:hover:not(:disabled) {
+  background: #475569;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }

@@ -1009,16 +1009,16 @@ function Dictionary() {
                         {result.pronunciation && (
                           <div className="result-pronunciation">
                             <div className="pronunciation-item">
-                              <img src="https://flagcdn.com/w40/gb.png" alt="UK" className="flag-icon" width="24" height="16" />
-                              <span className="pronunciation-label">UK</span>
-                              <span className="pronunciation-text">{result.pronunciation.uk}</span>
-                              <button className="speaker-btn" onClick={() => playPronunciation(wordToPronounce, 'en-GB')}>🔊</button>
-                            </div>
-                            <div className="pronunciation-item">
                               <img src="https://flagcdn.com/w40/us.png" alt="US" className="flag-icon" width="24" height="16" />
                               <span className="pronunciation-label">US</span>
                               <span className="pronunciation-text">{result.pronunciation.us}</span>
                               <button className="speaker-btn" onClick={() => playPronunciation(wordToPronounce, 'en-US')}>🔊</button>
+                            </div>
+                            <div className="pronunciation-item">
+                              <img src="https://flagcdn.com/w40/gb.png" alt="UK" className="flag-icon" width="24" height="16" />
+                              <span className="pronunciation-label">UK</span>
+                              <span className="pronunciation-text">{result.pronunciation.uk}</span>
+                              <button className="speaker-btn" onClick={() => playPronunciation(wordToPronounce, 'en-GB')}>🔊</button>
                             </div>
                           </div>
                         )}

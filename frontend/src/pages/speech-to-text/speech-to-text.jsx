@@ -143,55 +143,53 @@ function SpeechToText() {
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter" style={{ color: '#3E424D' }}>Speech to Text</h1>
         </div>
 
-        <div className="control-panel">
-          <div className="language-select-wrapper">
-            <label htmlFor="language-select">Language:</label>
-            <select
-              id="language-select"
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(e.target.value)}
-              className="language-select"
-              disabled={isRecording}
-            >
-              {languageOptions.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="button-group">
-            <button
-              onClick={handleToggle}
-              className={`record-btn ${isRecording ? 'recording' : ''}`}
-              disabled={isProcessing}
-            >
-              {isRecording ? '⏹ Stop' : '▶ Start'}
-            </button>
-            <button
-              onClick={handleClear}
-              className="clear-btn"
-              disabled={isRecording || !transcribedText}
-            >
-              Clear
-            </button>
-          </div>
-        </div>
-
-        <div className="status-indicator">
-          {isRecording && (
-            <div className="recording-indicator">
-              <span className="pulse-dot"></span>
-              Recording...
-            </div>
-          )}
-          {isProcessing && (
-            <div className="processing-indicator">Processing...</div>
-          )}
-        </div>
-
         <div className="text-output">
+          <div className="control-panel">
+            <div className="language-select-wrapper">
+              <label htmlFor="language-select">Language:</label>
+              <select
+                id="language-select"
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+                className="language-select"
+                disabled={isRecording}
+              >
+                {languageOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <div className="button-group">
+                <button
+                  onClick={handleToggle}
+                  className={`record-btn ${isRecording ? 'recording' : ''}`}
+                  disabled={isProcessing}
+                >
+                  {isRecording ? '⏹ Stop' : '▶ Start'}
+                </button>
+                <button
+                  onClick={handleClear}
+                  className="clear-btn"
+                  disabled={isRecording || !transcribedText}
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="status-indicator">
+            {isRecording && (
+              <div className="recording-indicator">
+                <span className="pulse-dot"></span>
+                Recording...
+              </div>
+            )}
+            {isProcessing && (
+              <div className="processing-indicator">Processing...</div>
+            )}
+          </div>
           <textarea
             value={transcribedText}
             readOnly

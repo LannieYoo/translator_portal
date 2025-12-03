@@ -441,7 +441,7 @@ function Home() {
                       if (otherLang) setTargetLang(otherLang.code)
                     }
                   }}
-                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors bg-transparent border border-border-light dark:border-border-dark"
+                  className="lang-select"
                 >
                   {languages.map(lang => (
                     <option key={lang.code} value={lang.code}>{lang.name}</option>
@@ -551,7 +551,7 @@ function Home() {
                 <select
                   value={targetLang}
                   onChange={(e) => setTargetLang(e.target.value)}
-                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors bg-transparent border border-border-light dark:border-border-dark"
+                  className="lang-select"
                 >
                   {languages.filter(lang => lang.code !== sourceLang).map(lang => (
                     <option key={lang.code} value={lang.code}>{lang.name}</option>
